@@ -1,0 +1,114 @@
+/* font settings */
+.font-thin {
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+  }
+
+.font-basic {
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+.font-semi-bold {
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: normal;
+}
+
+.font-bold {
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.font-extra-bold {
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+.extra-small {font-size: 5px;}
+.small {font-size: 9px;}
+.medium {font-size: 13px;}
+.semi-big {font-size: 17px;}
+.big {font-size: 20px;}
+.extra-big {font-size: 25px;}
+
+html, body {margin: 0; height: 100%;}
+
+.Logo {width: 168px; height: 51px; transform: translate(-50%, -50%); top: 50%; left: 50%; position: absolute;}
+.LogoContainer {width: 100%; height: 75px; background-color: rgb(246, 249, 255); border-bottom: 1px gray solid; position: relative;}
+
+/* 상단 네비게이션 */
+.MenuList ul {border-bottom: 2px black solid; margin: 0;}
+.MenuList {text-align: center; list-style-type: none; position: relative; text-align: center;}
+.MenuList li {display: inline-block; padding: 20px 50px 20px 50px;}
+.MenuList li a {text-decoration: none; color: black; font-size: 17.5px; position: relative; padding: 5px; font-weight: 400; display: inline-block;}
+
+.MenuList li a::after {content: ""; position: absolute; left: 0; top: 100%; width: 100%; height: 1.5px; background-color: black; transform: scaleX(0); transform-origin: 0 50%; transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);}
+.MenuList li:hover a::after {transform: scaleX(1); transform-origin: 0 50%; transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);}
+
+/* 메인 */
+.main {width: 100%; height: 77%;}
+.SortContent {width: 100%; height: 100%; grid-template-columns: 1fr 1fr 1fr; display: grid;}
+.SeparateElement {width: 100%; height: 100%;}
+.upper-sorted-item {height: 100%; position: relative;}
+
+.first-element, .second-element {border-right: 1.5px black solid;}
+
+.element-explain {padding: 10px; border-bottom: 0.5px black solid; position: relative; display: grid; grid-template-columns: 4fr 1fr;}
+.music-preview {position: absolute; width: 100%; height: 100%; text-align: center;}
+.music-content {width: 100%; height: 75px; border-bottom: 1px gainsboro solid;}
+.music-content-last {width: 100%; height: 75px; border-bottom: 1px black solid;}
+.tab-move {position: relative; width: 100%; display: block; text-align: center;}
+.Movetab {color: black; position: absolute; transform: translate(-50%, -50%); top: 50%; left: 50%; width: 100%;}
+.Movetab:hover {color: red;}
+
+.image-preview {position: absolute; width: 100%; height: 100%; display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr 1fr 1fr;}
+.image-content {height: 200px; display: grid; grid-template-rows: 5fr 1fr;}
+.image-container {position: relative; height: 100%;}
+.image {width: 90%; height: 90%; position: absolute; border-radius: 25px; transform: translate(-50%, -50%); top: 50%; left: 50%; transition: 0.25s;}
+.image:hover {filter: brightness(75%); transition: 0.25s; cursor: pointer;}
+.date {color: gray; position: absolute; transform: translate(-50%, -50%); top: 50%; left: 50%; width: 100%;}
+.blur {mask-image: linear-gradient(to bottom, black 10%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 10%, transparent 100%);}
+.image-explain {position: relative; display: block; text-align: center;}
+.show-more {position: relative; margin-bottom: inline-block; padding: 15px 30px; font-size: 18px; color: #000; background: transparent; border-bottom: 1px solid black; overflow: hidden; cursor: pointer; z-index: 1;}
+.show-more::before {content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: #000; z-index: -1; transition: all 0.4s ease;}
+.show-more:hover::before {left: 0;}
+.show-more:hover {color: white;}
+.show-more-img {position: relative; margin-top: 7px; border: 1px black solid; height: 56px; width: 299.5%; font-size: 18px; color: #000; background: transparent; overflow: hidden; cursor: pointer; z-index: 1;}
+.show-more-img::before {content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: #000; z-index: -1; transition: all 0.4s ease;}
+.show-more-img:hover::before {left: 0;}
+.show-more-img:hover {color: white;}
+.show-more-btn-img {position: absolute; transform: translate(-50%, -50%); top: 50%; left: 50%;}
+
+.e-con-inner-music {width: 100%; height: 100%; position: relative; display: grid; grid-template-columns: 1fr 3.5fr 1fr;}
+.img {width: 102.8px; height: 57.7px; border-radius: 10px; position: absolute; transform: translate(-50%, -50%); top: 50%; left: 0%; margin-left: 60px;}
+.explain {width: 100%; height: 100%; position: relative; display: block; text-align: center;}
+.explain-span {position: absolute; transform: translate(-50%, -50%); top: 50%; left: 50%; width: 100%;}
+.linked {width: 100%; height: 100%; position: relative;}
+.linked-img {width: 50px; height: 50px; position: absolute; transform: translate(-50%, -50%); top: 50%; left: 50%; cursor: pointer;}
+
+.e-con-inner-img {width: 30%;}
+
+/* 하단 */
+.copyright-container {width: 100%; height: 60px; position: relative; display: block; text-align: center; background-color: rgb(46, 46, 46);}
+.copyright {position: absolute; transform: translate(-50%, -50%); top: 50%; left: 50%; color: rgb(238, 238, 238);}
+
+/* 1800px 이하 */
+[data-min-width="<1800"] {display: none;}
+[data-min-width=">1800"] {display: block; width: 100%; height: 100%;}
+
+@media (max-width: 1800px){
+  [data-min-width=">1800"] {display: none;}
+  [data-min-width="<1800"] {display: block;}
+
+  .warning {padding: 10px;}
+}
