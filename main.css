@@ -1,1 +1,21 @@
+/* 기본 설정 */
+html, body {margin: 0; padding: 0; width: 100%; height: 100%;}
+.background {background-color: gray; width: 100%; height: 100%;}
+.content {max-width: 1200px; margin: 0 auto; background-color: #f3f3f3; width: 100%; height: 100%;}
 
+.header {width: 100%; height: 75px; border-bottom: 1px black solid; background-color: white; z-index: 1;}
+.header-content {width: 100%; height: 100%;}
+.header-content-container {width: 100%; height: 100%; display: grid; grid-template-columns: 1fr}
+.logo-container {width: 100%; height: 100%; position: relative; border-right: 1px black solid;}
+.logo {width: 231px; height: 65px; position: absolute; transform: translate(-50%, -50%); top: 50%; left: 50%;}
+
+/* 메인 콘텐츠 */
+.main {width: 100%; height: calc(100% - 75.8px);}
+.sidebar {width: 250px; height: 100%; border-right: 1px black solid; background-color: white;}
+.quick-menu {width: 100%; height: 100%; margin: 0 20px 20px 20px;}
+.quick-menu > span {font-size: 30px; font-family: "Noto Sans KR", sans-serif; font-optical-sizing: auto; font-weight: 700; font-style: normal;}
+.quick-menu-content {padding-top: 40px;}
+.webtoon {margin: 0; padding-top: 7px; padding-left: 40px;}
+.webtoon > li {list-style: none; padding: 2px;}
+.webtoon > li:hover {text-decoration: underline; color: red; cursor: pointer;}
+.quick-menu-content > span {padding: 20px 0 0 20px; font-size: 25px; font-family: "Noto Sans KR", sans-serif; font-weight: 500;}
