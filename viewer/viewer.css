@@ -7,7 +7,7 @@
 body {margin: 0; padding: 0; background: gainsboro; color: #000; font-family: sans-serif; overflow-x: hidden;}
 .viewer-container {max-width: 800px; margin: 20px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: center;}
 .viewer-title {font-size: 24px; margin-bottom: 20px;}
-.viewer-images img {width: 620.8px; height: 1435px; display: block; margin: 0 auto 10px auto;}
+.viewer-images img {width: 720px;; display: block; margin: 0 auto 0px auto;}
 .btn-container {display: flex; justify-content: space-between; margin-top: 20px;}
 button {background-color: #007bff; border: none; color: white; padding: 20px 170px; font-size: 16px; border-radius: 4px; cursor: pointer; user-select: none;}
 button:disabled {background-color: #ccc; cursor: not-allowed;}

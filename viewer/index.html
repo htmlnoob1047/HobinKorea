@@ -2,151 +2,23 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>소설 뷰어</title>
-  <style>
-    .header {
-      width: 100%;
-      height: 75px;
-      border-bottom: 1px black solid;
-      background-color: white;
-      z-index: 1;
-    }
-    .header-content {
-      width: 100%;
-      height: 100%;
-    }
-    .header-content-container {
-      width: 100%;
-      height: 100%;
-      display: grid;
-      grid-template-columns: 1fr;
-    }
-    .logo-container {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      border-right: 1px black solid;
-    }
-    .logo {
-      width: 231px;
-      height: 65px;
-      position: absolute;
-      transform: translate(-50%, -50%);
-      top: 50%;
-      left: 50%;
-      cursor: pointer;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      background: gainsboro;
-      color: #000;
-      font-family: sans-serif;
-      overflow-x: hidden;
-    }
-    .viewer-container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .viewer-title {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-    .viewer-content {
-      white-space: pre-wrap;
-      text-align: left;
-      min-height: 400px;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      background-color: #f9f9f9;
-      margin-bottom: 20px;
-      font-size: 16px;
-      color: #222;
-    }
-    .viewer-content.loading {
-      color: #999;
-      font-style: italic;
-    }
-    .viewer-content.error {
-      color: red;
-      font-weight: bold;
-    }
-    .btn-container {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-    button {
-      background-color: #007bff;
-      border: none;
-      color: white;
-      padding: 20px 170px;
-      font-size: 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      user-select: none;
-      transition: background-color 0.3s ease;
-    }
-    button:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
-    .fixed-nav-buttons {
-      position: fixed;
-      top: 50%;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      transform: translateY(-50%);
-      pointer-events: none;
-      z-index: 1000;
-    }
-    .fixed-nav-buttons button {
-      pointer-events: all;
-      background-color: #007bff;
-      border: none;
-      color: white;
-      padding: 10px 16px;
-      font-size: 20px;
-      border-radius: 50%;
-      cursor: pointer;
-      opacity: 0.9;
-      margin: 0 10px;
-      user-select: none;
-      transition: opacity 0.3s ease;
-    }
-    .fixed-nav-buttons button:disabled {
-      background-color: #ccc !important;
-      cursor: not-allowed;
-      opacity: 0.7;
-    }
-    .fixed-nav-buttons.hidden {
-      display: none;
-    }
-  </style>
+  <title>-</title>
+  <link rel="stylesheet" href="viewer.css">
 </head>
 <body>
   <div class="header">
     <div class="header-content">
       <div class="header-content-container">
+        <!-- 로고 범위 지정 -->
         <div class="logo-container">
-          <img class="logo" src="logo.png" alt="로고" onclick="window.location.href = '../index.html'">
+          <img class="logo" src="logo.png" onclick="window.location.href = '../index.html'">
         </div>
       </div>
     </div>
   </div>
-
   <div class="viewer-container">
     <div class="viewer-title" id="viewer-title">로딩 중...</div>
-    <div class="viewer-content loading" id="viewer-content">내용을 불러오는 중입니다...</div>
+    <div class="viewer-images" id="viewer-images"></div>
 
     <!-- 하단 버튼 -->
     <div class="btn-container">
@@ -155,128 +27,11 @@
     </div>
 
     <!-- 좌우 고정 버튼 -->
-    <div class="fixed-nav-buttons" id="fixed-nav-buttons">
+    <div class="fixed-nav-buttons">
       <button id="floating-prev">◀</button>
       <button id="floating-next">▶</button>
     </div>
   </div>
-
-  <script>
-    (() => {
-      const params = new URLSearchParams(window.location.search);
-      const novelId = params.get('id');
-      let chapter = parseInt(params.get('chapter'), 10);
-      const title = params.get('title') ? decodeURIComponent(params.get('title')) : '';
-      const totalChapters = parseInt(params.get('total'), 10);
-
-      const titleElement = document.getElementById('viewer-title');
-      const contentElement = document.getElementById('viewer-content');
-      const prevBtn = document.getElementById('prev-btn');
-      const nextBtn = document.getElementById('next-btn');
-      const floatingPrev = document.getElementById('floating-prev');
-      const floatingNext = document.getElementById('floating-next');
-      const fixedNavButtons = document.getElementById('fixed-nav-buttons');
-
-      // 필수 정보 체크
-      if (!novelId || isNaN(chapter) || !title || isNaN(totalChapters)) {
-        titleElement.textContent = '잘못된 접근입니다.';
-        contentElement.classList.remove('loading');
-        contentElement.classList.add('error');
-        contentElement.textContent = '필수 정보가 누락되었습니다.';
-        prevBtn.disabled = true;
-        nextBtn.disabled = true;
-        floatingPrev.disabled = true;
-        floatingNext.disabled = true;
-        return;
-      }
-
-      // 제목 및 챕터 업데이트
-      function updateTitle() {
-        document.title = `${title} | ${chapter}화`;
-        titleElement.textContent = `${title} - ${chapter}화 (${totalChapters}화 중)`;
-      }
-
-      // 소설 텍스트 로드
-      function loadContent() {
-        contentElement.classList.remove('error');
-        contentElement.classList.add('loading');
-        contentElement.textContent = '내용을 불러오는 중입니다...';
-
-        const filePath = `/novel-data/${novelId}/c${chapter}/c${chapter}.txt`;
-
-        fetch(filePath)
-          .then(response => {
-            if (!response.ok) throw new Error('텍스트 파일을 찾을 수 없습니다.');
-            return response.text();
-          })
-          .then(text => {
-            contentElement.classList.remove('loading');
-            contentElement.textContent = text;
-          })
-          .catch(err => {
-            contentElement.classList.remove('loading');
-            contentElement.classList.add('error');
-            contentElement.textContent = '소설 내용을 불러오는 데 실패했습니다.';
-            console.error(err);
-          });
-      }
-
-      // 버튼 활성화/비활성화
-      function updateButtons() {
-        const prevDisabled = chapter <= 1;
-        const nextDisabled = chapter >= totalChapters;
-
-        prevBtn.disabled = prevDisabled;
-        nextBtn.disabled = nextDisabled;
-        floatingPrev.disabled = prevDisabled;
-        floatingNext.disabled = nextDisabled;
-      }
-
-      // 챕터 변경 함수
-      function changeChapter(diff) {
-        const newChapter = chapter + diff;
-        if (newChapter < 1 || newChapter > totalChapters) return;
-        chapter = newChapter;
-        updateTitle();
-        loadContent();
-        updateButtons();
-        updateURL();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-
-      // URL 업데이트
-      function updateURL() {
-        const url = new URL(window.location);
-        url.searchParams.set('id', novelId);
-        url.searchParams.set('chapter', chapter);
-        url.searchParams.set('title', encodeURIComponent(title));
-        url.searchParams.set('total', totalChapters);
-        history.replaceState(null, '', url);
-      }
-
-      // 좌우 고정 버튼 숨김 처리 (스크롤 끝에 닿으면 숨김)
-      function onScroll() {
-        const atBottom = (window.innerHeight + window.pageYOffset) >= (document.documentElement.scrollHeight - 10);
-        if (atBottom) {
-          fixedNavButtons.classList.add('hidden');
-        } else {
-          fixedNavButtons.classList.remove('hidden');
-        }
-      }
-
-      // 이벤트 리스너 연결
-      prevBtn.addEventListener('click', () => changeChapter(-1));
-      nextBtn.addEventListener('click', () => changeChapter(1));
-      floatingPrev.addEventListener('click', () => changeChapter(-1));
-      floatingNext.addEventListener('click', () => changeChapter(1));
-      window.addEventListener('scroll', onScroll);
-
-      // 초기화
-      updateTitle();
-      loadContent();
-      updateButtons();
-      onScroll();
-    })();
-  </script>
+  <script src="loadfile.js" type="text/javascript"></script>
 </body>
 </html>
