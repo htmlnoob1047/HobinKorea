@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <title id="page-title"> - </title>
   <link rel="stylesheet" href="main.css">
+  <script src="ChapterLoad.js" type="text/javascript"></script>
 </head>
 <body>
     <div class="background">
@@ -43,7 +44,7 @@
             </div>
             <div class="footer"></div>
             <!-- 웹툰 정보 불러오기 -->
-            <script src="WebtoonInfo.js" type="text/javascript"></script>
+            <!-- <script src="WebtoonInfo.js" type="text/javascript"></script> -->
             <!-- 웹툰 정보 viewer로 넘기기 -->
             <script type="text/javascript">
             window.addEventListener('DOMContentLoaded', () => {
@@ -55,30 +56,82 @@
             });
             </script>
             <script type="text/javascript">
-            window.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
-            const webtoonId = params.get('id');
-            const title = params.get('name') || '';
-            const totalChapters = parseInt(params.get('chapters'), 10);
-            const align = document.querySelector('.webtoon-chapter-content-align');
+            const id = params.get('id');
+            const name = params.get('name');
+            const writer = params.get('writer');
+            const cover = params.get('cover');
+            const tags = params.get('tags');
+            const totalChapters = parseInt(params.get('chapters')) || 0;
+            const type = params.get('type') || 'webtoon'; // 기본값 fallback
 
-            if (!webtoonId || !title || isNaN(totalChapters) || !align) {
-                console.error('필수 데이터 누락');
-                return;
+            // 제목, 작가, 커버 설정
+            document.title = `${name} - 미리보기`;
+            document.querySelector('.webtoon-title').textContent = name;
+            document.querySelector('.webtoon-writer-info').textContent = writer;
+
+            // 태그 생성
+            if (tags) {
+                const tagContainer = document.querySelector('.tag');
+                const tagList = tags.split(',').map(t => t.trim());
+                tagList.forEach(tag => {
+                const span = document.createElement('span');
+                span.textContent = `#${tag}`;
+                span.style.marginRight = '8px';
+                span.style.padding = '4px 8px';
+                span.style.background = '#eee';
+                span.style.borderRadius = '8px';
+                span.style.fontSize = '0.9em';
+                span.style.display = 'inline-block';
+                tagContainer.appendChild(span);
+                });
             }
 
+            const coverImg = document.querySelector('.webtoon-preview-cover');
+            if (coverImg) {
+                coverImg.src = cover.startsWith('http') || cover.startsWith('/') ? cover : `../${cover}`;
+            }
+
+            const chapterContainer = document.querySelector('.webtoon-chapter-content-align');
+            chapterContainer.innerHTML = ''; // 초기화
+
             for (let i = 1; i <= totalChapters; i++) {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'webtoon-chapter';
+                const chapterDiv = document.createElement('div');
+                chapterDiv.className = 'webtoon-chapter';
 
-                wrapper.innerHTML = `
-                <div class="webtoon-chapter-number">${i}화</div>
-                <div class="webtoon-preview-site-select">
-                    <div style="cursor:pointer;" onclick="location.href='../viewer/index.html?webtoon=${encodeURIComponent(webtoonId)}&chapter=${i}&title=${encodeURIComponent(title)}&total=${totalChapters}'"></div>
-                </div>
-                `;
+                const numberDiv = document.createElement('div');
+                numberDiv.className = 'webtoon-chapter-number';
+                numberDiv.textContent = `${i}화`;
 
-                align.appendChild(wrapper);
+                const previewDiv = document.createElement('div');
+                previewDiv.className = 'webtoon-preview-site-select';
+                previewDiv.style.cursor = 'pointer';
+
+                previewDiv.addEventListener('click', () => {
+                const query = new URLSearchParams({
+                    chapter: i
+                });
+
+                if (type === 'novel') {
+                    // 소설일 경우 novel-viewer로 이동
+                    query.set('id', id);
+                    query.set('title', name);
+                    query.set('total', totalChapters);
+                    window.location.href = `../novel-viewer/index.html?${query.toString()}`;
+                } else {
+                    // 웹툰일 경우 viewer로 이동
+                    query.set('webtoon', id);
+                    query.set('title', name);
+                    query.set('total', totalChapters);
+                    window.location.href = `../viewer/index.html?${query.toString()}`;
+                }
+                });
+
+                previewDiv.appendChild(document.createElement('div')); // 내부 hover 효과용 div
+                chapterDiv.appendChild(numberDiv);
+                chapterDiv.appendChild(previewDiv);
+                chapterContainer.appendChild(chapterDiv);
             }
             });
             </script>

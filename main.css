@@ -25,16 +25,16 @@ html, body {margin: 0; padding: 0; width: 100%; height: 100%;}
 .webtoon > li:hover {color: black; cursor: pointer; font-weight: 500; transition: 0.2s ease;}
 .quick-menu-content > span {padding: 20px 0 0 20px; font-size: 25px; font-family: "Noto Sans KR", sans-serif; font-weight: 500;}
 .webton-content-upper-menu {width: 100%; position: relative;}
-.more-btn {position: absolute; top: 50%; right: 0%; transform: translate(-50%, -50%); border: 1px black solid}
+.more-btn {position: absolute; top: 50%; right: 0%; transform: translate(-50%, -50%); border: 1px black solid; border: none;}
 
 .main-content {height: calc(100% - 40px); background-color: rgb(248, 248, 248); overflow-y: auto; padding: 20px;}
 .main-content-info {font-size: 25px; font-family: "Noto Sans KR", sans-serif; font-optical-sizing: auto; font-weight: 500; font-style: normal; padding-top: 20px;}
 .general-webtoon {display: flex;}
 .content-wrapper {overflow-x: auto; height: 285px; padding-top: 15px;}
-.content-wrapper-manga {overflow-x: auto; height: 310px; padding-top: 15px;}
+.content-wrapper-manga {overflow-x: auto; height: 320px; padding-top: 15px;}
 .webtoon-cover {width: 144px; height: 184px; border-radius: 10px; transform: scale(1); filter: brightness(1); transition: 0.25s ease-out, filter 0.25s linear; border: 1px black solid; box-shadow: 3px 3px 3px 3px gray;}
 .webtoon-cover:hover {transform: scale(0.97); filter: brightness(0.75); transition: 0.25s ease-out, filter 0.25s linear;}
-.novel-cover {width: 144px; height: 210px; border-radius: 10px; transform: scale(1); filter: brightness(1); transition: 0.25s ease-out, filter 0.25s linear; border: 1px black solid; box-shadow: 3px 3px 3px 3px gray;}
+.novel-cover {width: 144px; height: 215px; border-radius: 10px; transform: scale(1); filter: brightness(1); transition: 0.25s ease-out, filter 0.25s linear; border: 1px black solid; box-shadow: 3px 3px 3px 3px gray;}
 .novel-cover:hover {transform: scale(0.97); filter: brightness(0.75); transition: 0.25s ease-out, filter 0.25s linear;}
 .general-webtoon-content {width: 144px; height: 100%; padding-right: 20px; cursor: pointer;}
 .webtoon-info {width: 100%; height: 100%;}

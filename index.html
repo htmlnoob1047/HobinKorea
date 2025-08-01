@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>뉴재이닷컴</title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="Keywords" content="뉴재이닷컴">
-  <meta name="Keywords" content="NEWJEY, 뉴재이, 유재이, 재이, 재게, 제리얌">
-  <meta name="Description" content="뉴재이닷컴. 취향에 맞는 웹툰과 음악을 한 눈에 즐기다">
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="Keywords" content="뉴재이닷컴, 유재이닷컴, NEWJEY, 뉴재이, 유재이, 재이, 재게, 제리얌">
+  <meta name="Description" content="뉴재이닷컴. 취향에 맞는 웹툰과 웹소설, 음악을 한 눈에 즐기다">
+  <!-- <meta name="robots" content="noindex, nofollow"> -->
   <meta http-equiv="imagetoolbar" content="no">
   <!-- cache settings -->
   <meta http-equiv="Cache-Control" content="no-cache">
@@ -305,7 +303,7 @@
                   <span class="general-webtoon-writer">비가</span>
                 </div>
               </div>
-              <div class="general-webtoon-content" data-general-webtoon-id="aksktkfehsdjqtdjtjdlsqkdgka">
+              <div class="general-webtoon-content" data-general-webtoon-id="aksktkfehsdjqtdjtjdlsqkdgka" data-the-number-of-chapter="985">
                 <div class="webtoon-info">
                   <img src="novel-cover/마나_살_돈_없어서_인방함.png" class="novel-cover">
                   <span class="general-webtoon-name">마나 살 돈 없어서 인방함</span>
@@ -357,7 +355,6 @@
   <!-- 툴팁, 사이트 이동 스크립트 -->
   <script src="tooltip.js" type="text/javascript"></script>
   <!-- <script src="MoveSite.js" type="text/javascript"></script> -->
-
   <!-- span > .general-webtoon-name 두 줄 이상시 eclipse 처리 -->
   <script type="text/javascript">
   document.querySelectorAll('.general-webtoon-name').forEach(span => {
@@ -378,54 +375,9 @@
   });
   </script>
   <!-- 사이트 이동 -->
-  <script type="text/javascript">
-  document.querySelectorAll('.general-webtoon-content').forEach(el => {
-    el.addEventListener('click', () => {
-      const id = el.dataset.generalWebtoonId;
-      const name = el.querySelector('.general-webtoon-name').textContent;
-      const writer = el.querySelector('.general-webtoon-writer').textContent;
-      const cover = el.querySelector('.webtoon-cover').getAttribute('src');
-      const tags = el.dataset.webtoonTag;
-      const chapters = el.dataset.theNumberOfChapter;
-
-      const params = new URLSearchParams({
-        id, name, writer, cover, tags, chapters
-      });
-
-      window.location.href = `content-preview/index.html?${params.toString()}`;
-    });
-  });
-  </script>
+  <script type="text/javascript"></script>
   <!-- 섹션 이동 -->
-   <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', () => {
-      console.log("DOMContentLoaded fired");
-
-      const elems = document.querySelectorAll('.general-webtoon-content');
-      console.log(`총 ${elems.length}개의 웹툰 콘텐츠 요소 발견`);
-
-      elems.forEach(el => {
-        el.addEventListener('click', () => {
-          console.log("웹툰 콘텐츠 클릭됨");
-
-          const id = el.dataset.generalWebtoonId;
-          const name = el.querySelector('.general-webtoon-name').textContent;
-          const writer = el.querySelector('.general-webtoon-writer').textContent;
-          const cover = el.querySelector('.webtoon-cover').getAttribute('src');
-          const tags = el.dataset.webtoonTag;
-          const chapters = el.dataset.theNumberOfChapter;
-
-          console.log({id, name, writer, cover, tags, chapters});
-
-          const params = new URLSearchParams({
-            id, name, writer, cover, tags, chapters
-          });
-
-          window.location.href = `content-preview/index.html?${params.toString()}`;
-        });
-      });
-    });
-  </script>
+  <script src="SectionMove.js" type="text/javascript"></script>
   <div class="mobile">
     <span style="font-size: 30px;">모바일 따위에서는 들어갈 수 없단다</span>
   </div>
